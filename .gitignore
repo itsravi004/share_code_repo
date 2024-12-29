@@ -3,3 +3,4 @@ ragollama/
 # Ignore .env file containing credentials, API keys, tokens, passwords, etc.
 .env
 .env
+firstapp.py

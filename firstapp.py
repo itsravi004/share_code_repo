@@ -1,8 +1,14 @@
 import streamlit as st
 import openai
+from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, BaseChatPromptTemplate, ChatMessagePromptTemplate
+
+from langchain_openai.chat_models.base import BaseChatOpenAI
+
+# Allow reuse of validator to avoid duplicate errors
+BaseChatOpenAI.Config.allow_reuse = True
 
 import os
 from dotenv import load_dotenv
@@ -11,6 +17,13 @@ from dotenv import load_dotenv
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT_ID"]="QandA ChatBot with OpenAI"
+
+# Cache and Initialize the LLM
+@st.cache_resource
+def initialize_llm(api_key, llm, temperature, max_tokens):
+    # Initialize the LLM and cache the result to optimize reruns
+    return ChatOpenAI(api_key=api_key, model=llm, temperature=temperature, max_tokens=max_tokens)
+
 
 #Prompt Template
 prompt = ChatPromptTemplate.from_messages(
@@ -40,10 +53,11 @@ max_tokens = st.sidebar.slider("Select Max Tokens",min_value=50,max_value=500,va
 
 # Main Chat Interface
 st.write("Ask your question")
-user_input = st.text_area("Enter your question here")
+user_input = st.text_input("Enter your question here")
+llm_instance = initialize_llm(api_key, llm, temperature, max_tokens)
 
 if user_input:
-    response = generate_response(user_input,api_key,llm,temperature,max_tokens)
+    response = generate_response(user_input,llm_instance)
     st.write(response)
     st.write("By Ravi but Powered by OpenAI")
 else:
