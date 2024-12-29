@@ -1,2 +1,4 @@
+# Ignore node_modules directory
+ragollama/
+# Ignore .env file containing credentials, API keys, tokens, passwords, etc.
 .env
-ragollama
