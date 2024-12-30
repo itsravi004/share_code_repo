@@ -28,3 +28,6 @@ fastapi
 uvicorn
 langserve
 sse_starlette
+arxiv
+duckdb
+wikipedia
