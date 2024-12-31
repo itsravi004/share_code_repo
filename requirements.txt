@@ -31,3 +31,4 @@ sse_starlette
 arxiv
 duckdb
 wikipedia
+langchain-ollama
