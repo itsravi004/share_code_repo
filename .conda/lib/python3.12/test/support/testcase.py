@@ -37,7 +37,7 @@ class FloatsAreIdenticalMixin:
         (4) x and y are both finite and nonzero, and x == y
 
         """
-        msg = 'floats {!r} and {!r} are not identical'
+        msg = "floats {!r} and {!r} are not identical"
 
         if isnan(x) or isnan(y):
             if isnan(x) and isnan(y):
@@ -49,7 +49,7 @@ class FloatsAreIdenticalMixin:
             elif copysign(1.0, x) == copysign(1.0, y):
                 return
             else:
-                msg += ': zeros have different signs'
+                msg += ": zeros have different signs"
         self.fail(msg.format(x, y))
 
 

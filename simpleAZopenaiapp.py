@@ -1,5 +1,6 @@
 import os
-#from langchain.document_loaders import PyPDFLoader
+
+# from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
@@ -14,6 +15,7 @@ os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT_ID"] = "AZ OpenAI Testbot"
 
+
 def ask_question(question):
     # Initialize the Azure ChatGPT model
     model = AzureChatOpenAI(
@@ -22,14 +24,14 @@ def ask_question(question):
         openai_api_key=os.getenv("OPENAI_API_KEY"),
         openai_api_base=os.getenv("OPENAI_API_BASE"),
         openai_api_version=os.getenv("OPENAI_API_VERSION"),
-        openai_api_type=os.getenv("OPENAI_API_TYPE")
+        openai_api_type=os.getenv("OPENAI_API_TYPE"),
     )
 
- # Ask the question
+    # Ask the question
     response = model(
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": question}
+            {"role": "user", "content": question},
         ]
     )
     return response["choices"][0]["message"]["content"]

@@ -3,13 +3,13 @@
 from idlelib import help
 import unittest
 from test.support import requires
-requires('gui')
+
+requires("gui")
 from os.path import abspath, dirname, join
 from tkinter import Tk
 
 
 class IdleDocTest(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         "By itself, this tests that file parsed without exception."
@@ -25,12 +25,12 @@ class IdleDocTest(unittest.TestCase):
         del cls.root
 
     def test_1window(self):
-        self.assertIn('IDLE Doc', self.window.wm_title())
+        self.assertIn("IDLE Doc", self.window.wm_title())
 
     def test_4text(self):
         text = self.window.frame.text
-        self.assertEqual(text.get('1.0', '1.end'), ' IDLE ')
+        self.assertEqual(text.get("1.0", "1.end"), " IDLE ")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main(verbosity=2)

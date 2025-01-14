@@ -1,5 +1,6 @@
 #!/Users/giggso/RV-CodeBase-Personal/Ude-Main1/Shared_Proj/.conda/bin/python
 """Extract pdf structure in XML format"""
+
 import logging
 import os.path
 import re
@@ -37,7 +38,7 @@ def dumpxml(out: TextIO, obj: object, codec: Optional[str] = None) -> None:
 
     if isinstance(obj, dict):
         out.write('<dict size="%d">\n' % len(obj))
-        for (k, v) in obj.items():
+        for k, v in obj.items():
             out.write("<key>%s</key>\n" % k)
             out.write("<value>")
             dumpxml(out, v)
@@ -173,7 +174,7 @@ def dumpoutline(
     try:
         outlines = doc.get_outlines()
         outfp.write("<outlines>\n")
-        for (level, title, dest, a, se) in outlines:
+        for level, title, dest, a, se in outlines:
             pageno = None
             if dest:
                 dest = resolve_dest(dest)
@@ -268,7 +269,7 @@ def dumppdf(
             obj = doc.getobj(objid)
             dumpxml(outfp, obj, codec=codec)
     if pagenos:
-        for (pageno, page) in enumerate(PDFPage.create_pages(doc)):
+        for pageno, page in enumerate(PDFPage.create_pages(doc)):
             if pageno in pagenos:
                 if codec:
                     for obj in page.contents:

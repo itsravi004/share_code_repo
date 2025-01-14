@@ -1,6 +1,7 @@
 #!/Users/giggso/RV-CodeBase-Personal/Ude-Main1/Shared_Proj/.conda/bin/python
 """A command line tool for extracting text and images from PDF and
 output it to plain text, html, xml or tags."""
+
 import argparse
 import logging
 import sys
@@ -40,7 +41,7 @@ def extract_text(
     output_dir: Optional[str] = None,
     debug: bool = False,
     disable_caching: bool = False,
-    **kwargs: Any
+    **kwargs: Any,
 ) -> AnyIO:
     if not files:
         raise ValueError("Must provide files to work upon!")
